@@ -1,0 +1,40 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html>
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>test_selector</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="css/stylesheet.css"/>
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #todo-list              { margin-bottom:30px; }
+    </style>
+
+    <!-- SPELLS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->       
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    
+    <script src="js/script.js"></script>
+</head>
+<!-- SET THE CONTROLLER AND GET ALL TODOS -->
+<body>	
+    <h2>Animated filter selector</h2>
+        <div id="wrapper-filter">
+            <ul id="filter-bar">
+                    <li class="filter-option option-1" data-target="option-1">Класс 1</li>
+                    <li class="filter-option option-2" data-target="option-2">Класс 2</li>
+                    <li class="filter-option option-3" data-target="option-3">Класс 3</li>
+                    <li class="filter-option option-3" data-target="option-3">Класс 4</li>
+              </ul>
+        </div>
+</body>
+</html>
