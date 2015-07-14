@@ -5,27 +5,50 @@ $(document).ready( function() {
 	function CreateMultipleSelectors()
 	{
 	}
-	
-	function RangeSelector($wrapperfilter){
-        var elements = [];
-        console.log( 'call RangeSelector' );
-		console.log( $wrapperfilter );
-        var $li = $wrapperfilter.children("ul#filter-bar").children("li.filter-option");
-		console.log('li: ' + $li.text());
-        $li.each(function(index){
-			console.log( index + ": " + $( this ).text() );
-			elements.push( this );});
-		var selector = this;
-		this.toggle = function($element) {
-			console.log('in toggle');
-		}
-        this.min_element = elements[0];
-        this.max_element = elements[elements.length - 1];        
+    
+    function ISelectControl($wrapperfilter) {                      
+        this._$ul = $($wrapperfilter).children("ul#filter-bar");
+        this._$li = this._$ul.children("li.filter-option");
+    }
+    ISelectControl.prototype.Select = function($element) {
+        alert(this);
+    } 
+    
+    function MultipleSelectControl($wrapperfilter){
+        ISelectControl.apply(this, $wrapperfilter);
+        console.log( 'call MultipleSelectControl' );
+        console.log('$ul : ' + this._$ul.text());
+		console.log('li: ' + this._$li.text());
+		var control_ = this;
+        this._$li.click(function(){
+            control_.Select($(this));
+        });
     }
     
-    var obj = new RangeSelector($("div#wrapper-filter"));
+    MultipleSelectControl.prototype = Object.create(ISelectControl.prototype);
+    MultipleSelectControl.prototype.constructor = MultipleSelectControl;
     
-    $("#filter-bar li").click(function(){
+    MultipleSelectControl.prototype.Select = function($element) {
+        $element.hasClass("active")? 
+        $element.removeClass("active"): $element.addClass("active");
+        $element.parent().children().each( function( index ) {
+            console.log( index + ": " + $( this ).text() );
+        });
+        $element.each( function( index ) {
+            console.log( index + "this : " + $( this ).text() );
+        });
+        var $ids = [];            
+        this._$ul.children().each( function( index ) {
+        if($element.hasClass("active"))
+            $ids.push($element.attr("data-target"));
+        });		
+        this._$ul.attr("data-ids", $ids);
+        console.log( "ids: " + $ids );
+    }
+    
+    var obj = new MultipleSelectControl($("div#wrapper-filter"));
+    
+    /*$("#filter-bar li").click(function(){
         $(this).hasClass("active")? 
 		$(this).removeClass("active"): $(this).addClass("active");
 		$(this).parent().children().each( function( index ) {
@@ -42,5 +65,6 @@ $(document).ready( function() {
 		});		
 		$parent.attr("data-ids", $ids);
 		console.log( "ids: " + $ids );
-    });
+        obj.Select($(this));
+    });*/
 })
