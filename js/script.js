@@ -18,9 +18,10 @@ $(document).ready( function() {
 		});
 	}
     
-    function ISelectControl( $wrapperfilter ) {                      
-        this._$ul = $($wrapperfilter).children("ul#filter-bar");
+    function ISelectControl( $wrapperfilter ) {                          	
+    	this._$ul = $($wrapperfilter).children("ul#filter-bar");
         this._$li = this._$ul.children("li.filter-option");
+        $($wrapperfilter).width( this._$li.length * this._$li.width() );
         this._data_target = [];
         var dt_str = this._$ul.attr( "data-target" ) ? this._$ul.attr( "data-target" ) : "";        
         this._data_target = dt_str.split(',');
