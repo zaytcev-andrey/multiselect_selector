@@ -1,24 +1,8 @@
-$(document).ready( function() {
-    
-	function CreateMultipleSelectors()
-	{
-		var selectors = [];
-		$("div#wrapper-filter").each(function(index) {
-			var select_method = $(this).attr("select-method");
-			switch (select_method) {
-				case "multiple":
-					selectors.push(new MultipleSelectControl($(this)));
-					break;
-				case "toggle":
-					selectors.push(new ToggleSelectControl($(this)));
-					break;
-				default:
-					throw new Error("Selector " + select_method + " not implemented");
-			}
-		});
-	}
-    
-    function ISelectControl( $wrapperfilter ) {                          	
+(function( $ ) {
+	
+	var selector_uid = 0;
+	
+	function ISelectControl( $wrapperfilter ) {                          	
     	this._$ul = $($wrapperfilter).children("ul#filter-bar");
         this._$li = this._$ul.children("li.filter-option");
         $($wrapperfilter).width( this._$li.length * this._$li.width() );
@@ -27,16 +11,28 @@ $(document).ready( function() {
         this._data_target = dt_str.split(',');
         
         this._get_li_by_target = function( data_target ) {
-        	return this._$ul.children("li.filter-option[data-target='" + data_target + "']");
+        	return this._$ul.children("li.filter-option[data-target='" + data_target + "']");        	        
         }
+        
+        this._id = "multiselect_uid" + ++selector_uid;
+        $($wrapperfilter).attr( "multiselect_uid", this._id );
     }
     
     ISelectControl.prototype.Select = function($element) {
          throw new Error("ISelectControl.Select not implemented");
-    } 
+    }
+    
+    ISelectControl.prototype.GetSelected = function($element) {
+        return this._data_target;
+    }
+    
+    ISelectControl.prototype.GetId = function($element) {
+         return this._id;
+    }
     
     function MultipleSelectControl($wrapperfilter){
-        ISelectControl.apply(this, $wrapperfilter);
+        
+    	ISelectControl.apply(this, $wrapperfilter);
 		
 		for ( var id in this._data_target ) {
 			var $element = this._get_li_by_target( this._data_target[ id ] );
@@ -66,7 +62,8 @@ $(document).ready( function() {
     }
 	
     function ToggleSelectControl($wrapperfilter){
-        ISelectControl.apply(this, $wrapperfilter);
+        
+    	ISelectControl.apply(this, $wrapperfilter);
 		
 		if ( this._data_target.length > 1 )
 			throw new Error("ToggleSelectControl can not have more than one element in data-target attribute");
@@ -87,8 +84,62 @@ $(document).ready( function() {
     	$element.addClass("active");     
     	this._data_target = $element.attr("data-target");
         this._$ul.attr( "data-target", this._data_target );
-        console.log( "ToggleSelectControl::data-target: " + this._data_target );
     }
-    
-	CreateMultipleSelectors();
+	
+	function CreateSelector( element ) {
+		var $element = $(element);
+		var select_method = $element.attr("select-method");
+		switch (select_method) {
+			case "multiple":
+				return new MultipleSelectControl( $element );
+			case "toggle":
+				return new ToggleSelectControl( $element );
+			default:
+				throw new Error("Selector " + select_method + " not implemented");
+		}
+	}
+	
+	var selectors = {};
+	
+	var methods = {
+		init : function() {
+			item = CreateSelector( this.first() );
+			selectors[item.GetId()] = item;
+			return this;
+		},
+		getdata : function() {
+			var uid = $(this).attr( "multiselect_uid" );			
+			console.log('in get function : jquery is ' + uid);
+			return selectors[uid].GetSelected();
+		}
+	};
+	
+	$.fn.multipleSelector = function( method ){
+		
+		if ( methods[ method ] ) {
+			return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
+		} else if ( typeof method === 'object' || !method ) {
+		      return methods.init.apply( this, arguments );
+		} else {
+		      $.error( 'There is no method "' +  method + '" for jQuery.multipleSelector' );
+		}  
+	}
+})(jQuery);
+
+$(document).ready( function() {
+	
+	$("#multiple").multipleSelector().click(function() {
+		console.log("#multiple clicked");
+		console.log("selected items : " + $(this).multipleSelector('getdata') );
+	});
+	
+	$("#toggle").multipleSelector().click(function() {
+		console.log("#toggle clicked");
+		console.log("selected items : " + $(this).multipleSelector('getdata') );
+	});
+	
+	$("#binary").multipleSelector().click(function() {
+		console.log("#binary clicked");
+		console.log("selected items : " + $(this).multipleSelector('getdata') );
+	});
 })

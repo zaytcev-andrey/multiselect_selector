@@ -7,7 +7,7 @@ text-align:center;
 #filter-bar {
     width: 100%; margin:0; padding:0; height:36px; display:inline-flex;
 }
-#wrapper-filter {
+.wrapper-filter {
     background-color:#fff; height:auto; margin:30px auto; border-radius: 30px; box-sizing: border-box; border: 2px solid #eee;
 }
 #filter-bar li {
