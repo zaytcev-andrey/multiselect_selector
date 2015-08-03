@@ -33,6 +33,8 @@
     function MultipleSelectControl($wrapperfilter){
         
     	ISelectControl.apply(this, $wrapperfilter);
+    	
+    	console.log( "initial data-target : " + this._data_target );
 		
 		for ( var id in this._data_target ) {
 			var $element = this._get_li_by_target( this._data_target[ id ] );

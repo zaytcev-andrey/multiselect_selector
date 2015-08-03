@@ -23,5 +23,5 @@ function mainController($scope) {
 		value : 'value-5'
 	} ];
 	
-	$scope.current_data.ids = [ $scope.options[ 0 ].option, $scope.options[ 2 ].option ];
+	$scope.current_data.ids = [ $scope.options[ 0 ].option, $scope.options[ 2 ].option ].join(',');
 }
