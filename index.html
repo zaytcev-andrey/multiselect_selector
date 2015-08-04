@@ -28,7 +28,7 @@
 <!-- SET THE CONTROLLER AND GET ALL TODOS -->
 <body ng-controller="mainController">	
     <h2>Animated filter selector</h2>
-        <div id="multiple" class="wrapper-filter" select-method="multiple">
+        <div id="multiple" class="multiselect-wrapper-filter" select-method="multiple">
             <ul id="filter-bar" data-target="option-1,option-2" >
                     <li class="filter-option option-1" data-target="option-1">Класс 1</li>
                     <li class="filter-option option-2" data-target="option-2">Класс 2</li>
@@ -38,7 +38,7 @@
         </div>
 		
 	<h2>Animated filter selector №2</h2>
-        <div id="toggle" class="wrapper-filter" select-method="toggle">
+        <div id="toggle" class="multiselect-wrapper-filter" select-method="toggle">
             <ul id="filter-bar" data-target="option-2">
                     <li class="filter-option option-1" data-target="option-1">Класс 1</li>
                     <li class="filter-option option-2" data-target="option-2">Класс 2</li>
@@ -48,7 +48,7 @@
         </div>
         
      <h2>Animated filter selector №3</h2>
-        <div id="binary" class="wrapper-filter" select-method="toggle">
+        <div id="binary" class="multiselect-wrapper-filter" select-method="toggle">
             <ul id="filter-bar">
                     <li class="filter-option option-1" data-target="option-1">Класс 1</li>
                     <li class="filter-option option-2" data-target="option-2">Класс 2</li>
@@ -56,7 +56,7 @@
         </div>
         
 	<h2>Angular filter selector</h2>
-        <div ng-model="current_data.ids" id="angular-binary" class="wrapper-filter" select-method="multiple" td-multipleselector>
+        <div ng-model="current_data.ids" id="angular-binary" class="multiselect-wrapper-filter" select-method="multiple" td-multipleselector>
             <ul id="filter-bar" data-target="{{ current_data.ids }}">
             	<li ng-repeat="option in options" class="filter-option" data-target={{option.option}}>{{option.value}}</li>
             </ul>

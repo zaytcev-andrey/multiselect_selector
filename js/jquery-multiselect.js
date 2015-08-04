@@ -127,21 +127,3 @@
 		}  
 	}
 })(jQuery);
-
-$(document).ready( function() {
-	
-	$("#multiple").multipleSelector().click(function() {
-		console.log("#multiple clicked");
-		console.log("selected items : " + $(this).multipleSelector('getdata') );
-	});
-	
-	$("#toggle").multipleSelector().click(function() {
-		console.log("#toggle clicked");
-		console.log("selected items : " + $(this).multipleSelector('getdata') );
-	});
-	
-	$("#binary").multipleSelector().click(function() {
-		console.log("#binary clicked");
-		console.log("selected items : " + $(this).multipleSelector('getdata') );
-	});
-})
