@@ -3,9 +3,9 @@
 	var selector_uid = 0;
 	
 	function ISelectControl( $wrapperfilter ) {                          	
-    	this._$ul = $($wrapperfilter).children("ul#filter-bar");
-        this._$li = this._$ul.children("li.filter-option");
-        $($wrapperfilter).width( this._$li.length * this._$li.width() );
+	    this._$ul = $($wrapperfilter).children("ul#wrapper-filter-bar");
+    	this._$li = this._$ul.children("li.filter-option");
+
         this._data_target = [];
         var dt_str = this._$ul.attr( "data-target" ) ? this._$ul.attr( "data-target" ) : "";        
         this._data_target = dt_str.split(',');
@@ -13,7 +13,20 @@
         this._get_li_by_target = function( data_target ) {
         	return this._$ul.children("li.filter-option[data-target='" + data_target + "']");        	        
         }
-        
+
+        this._get_li_max_width = function () {
+            var maxWidth = 0;
+            var maxLimit = 200;
+            this._$li.each(function (index, element) {
+                maxWidth = Math.max( $(element).width(), maxWidth );
+            });
+            return Math.min( maxWidth, maxLimit );
+        }
+
+        var li_Width = this._get_li_max_width();
+        this._$li.width(li_Width);
+        $($wrapperfilter).width( this._$li.length * li_Width);
+
         this._id = "multiselect_uid" + ++selector_uid;
         $($wrapperfilter).attr( "multiselect_uid", this._id );
     }

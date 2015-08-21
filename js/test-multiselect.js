@@ -14,6 +14,11 @@ $(document).ready( function() {
 		console.log("#binary clicked");
 		console.log("selected items : " + $(this).multipleSelector('getdata') );
 	});
+
+	$("#binary-small").multipleSelector().click(function () {
+	    console.log("#binary clicked");
+	    console.log("selected items : " + $(this).multipleSelector('getdata'));
+	});
 });
 
 var angular_app = angular.module('angular_app', ['ui.multopleselector']);

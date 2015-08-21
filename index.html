@@ -1,4 +1,4 @@
-<!-- index.html -->
+﻿<!-- index.html -->
 <!doctype html>
 
 <!-- ASSIGN OUR ANGULAR MODULE -->
@@ -37,7 +37,7 @@
 <body ng-controller="mainController">	
     <h2>Animated filter selector</h2>
         <div id="multiple" class="multiselect-wrapper-filter" select-method="multiple">
-            <ul id="filter-bar" data-target="option-1,option-2" >
+            <ul id="wrapper-filter-bar" data-target="option-1,option-2" >
                     <li class="filter-option option-1" data-target="option-1">Класс 1</li>
                     <li class="filter-option option-2" data-target="option-2">Класс 2</li>
                     <li class="filter-option option-3" data-target="option-3">Класс 3</li>
@@ -47,7 +47,7 @@
 		
 	<h2>Animated filter selector №2</h2>
         <div id="toggle" class="multiselect-wrapper-filter" select-method="toggle">
-            <ul id="filter-bar" data-target="option-2">
+            <ul id="wrapper-filter-bar" data-target="option-2">
                     <li class="filter-option option-1" data-target="option-1">Класс 1</li>
                     <li class="filter-option option-2" data-target="option-2">Класс 2</li>
                     <li class="filter-option option-3" data-target="option-3">Класс 3</li>
@@ -57,15 +57,23 @@
         
      <h2>Animated filter selector №3</h2>
         <div id="binary" class="multiselect-wrapper-filter" select-method="toggle">
-            <ul id="filter-bar">
+            <ul id="wrapper-filter-bar">
                     <li class="filter-option option-1" data-target="option-1">Класс 1</li>
                     <li class="filter-option option-2" data-target="option-2">Класс 2</li>
             </ul>
         </div>
+
+    <h2>Animated filter selector №4</h2>
+    <div id="binary-small" class="multiselect-wrapper-filter" select-method="toggle">
+        <ul id="wrapper-filter-bar" data-target="option-2">
+            <li class="filter-option option-1" data-target="option-1">1</li>
+            <li class="filter-option option-2" data-target="option-2">2 wery long-long name</li>
+        </ul>
+    </div>
         
 	<h2>Angular filter selector</h2>
         <div ng-model="current_data.ids" id="angular-binary" class="multiselect-wrapper-filter" select-method="multiple" td-multipleselector>
-            <ul id="filter-bar" data-target="{{ current_data.ids }}">
+            <ul id="wrapper-filter-bar" data-target="{{ current_data.ids }}">
             	<li ng-repeat="option in options" class="filter-option" data-target={{option.option}}>{{option.value}}</li>
             </ul>
         </div>
