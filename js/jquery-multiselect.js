@@ -18,14 +18,14 @@
             var maxWidth = 0;
             var maxLimit = 200;
             this._$li.each(function (index, element) {
-                maxWidth = Math.max( $(element).width(), maxWidth );
+                maxWidth = Math.max($(element).width(), maxWidth);
             });
             return Math.min( maxWidth, maxLimit );
         }
 
-        var li_Width = this._get_li_max_width();
+        var li_Width = this._get_li_max_width() * 1.2;
         this._$li.width(li_Width);
-        $($wrapperfilter).width( this._$li.length * li_Width);
+        $($wrapperfilter).width( this._$li.length * li_Width );
 
         this._id = "multiselect_uid" + ++selector_uid;
         $($wrapperfilter).attr( "multiselect_uid", this._id );
